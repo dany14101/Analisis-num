@@ -44,4 +44,15 @@ def falsan(a,b,error=1e-3,limite=50):
             break
     return(x)
 
-#Codigo para el metodo de aproximaciones susesivas
+#Codigo para el metodo de punto fijo
+def puntofijo(x0,error=1e-3,limite=50):
+    p=lambda x:1*(3*x+2)
+    for _ in range(limite):
+        x1=p(x0)
+        if abs(x1-x0)<error:
+            break
+        x0=x1
+    return (x1)
+
+
+#Codigo para el metodo de newton raphson
