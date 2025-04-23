@@ -56,3 +56,12 @@ def puntofijo(x0,error=1e-3,limite=50):
 
 
 #Codigo para el metodo de newton raphson
+def newton(x0,error=1e-3,limite=50):
+    f= lambda x:5*x*3+10*x+5     
+    df= lambda x:15*x**2+10                
+    for _ in range(limite):
+        x1=x0-f(x0)/df(x0)
+        if abs(x1-x0)<error:
+            break
+        x0=x1
+    return (x1)
