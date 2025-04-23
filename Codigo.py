@@ -65,3 +65,5 @@ def newton(x0,error=1e-3,limite=50):
             break
         x0=x1
     return (x1)
+
+#Codigo para el metodo de secante
