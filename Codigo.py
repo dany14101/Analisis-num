@@ -158,7 +158,7 @@ def funcion(x):
 
 #Codigo para simpson 1/3
 def simpsontercio(limab,limar,n): 
-    if n % 2 != 0:
+    if n%2!=0:
         exit()
     h=(limar-limab)/n
     sumaimpar=sumapar=0
@@ -170,3 +170,18 @@ def simpsontercio(limab,limar,n):
         if i%2!=0:
          sumaimpar+=4*funcion(xi)    
     return float((h/3)*(suma+sumapar+sumaimpar)
+
+#Codigo para simpson 3/8
+def simpsonoct(limab,limar,n): 
+    if n%3!=0:
+        exit()
+    h=(limar-limab)/n
+    suma1=suma2=suma3=0
+    suma=funcion(limab)+funcion(limar)
+    for i in range(1,n):
+        xi=limab+i*h
+        if i%3==0:
+            suma3+=2*funcion(xi)
+        else:
+            suma1+=3*funcion(xi)
+    return float((3*h/8)*(suma+suma1+suma2))
