@@ -143,3 +143,28 @@ def gaussseidel(A,b,x0=None,error=1e-3,limite=50):
         if np.linalg.norm(arr-anterior,ord=np.inf)<error:
             return (arr)
     return (arr)
+
+#Codigo para metodo trapecio
+def trap(limab,limar,n): 
+    h=(limar-limab)/n
+    suma=funcion(limab)+funcion(limar)
+    for i in range(1,n):
+        xi=limab+i*h
+        suma+=2*funcion(xi)     
+    return float((h/2)*suma)
+
+def funcion(x):
+    return float (x**2)
+
+#Codigo para simpson 1/3
+def trap(limab,limar,n): 
+    h=(limar-limab)/n
+    suma=funcion(limab)+funcion(limar)
+    for i in range(1,n):
+        if i%2==0:
+         xi=limab+i*h
+         sumapar+=2*funcion(xi)    
+     for i in range(1,n):
+        xi=limab+i*h
+        sumapar+=2*funcion(xi)    
+    return float((h/2)*suma)
