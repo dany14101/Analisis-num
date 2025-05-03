@@ -171,7 +171,7 @@ def simpsontercio(limab,limar,n):
          sumaimpar+=4*funcion(xi)    
     return float((h/3)*(suma+sumapar+sumaimpar)
 
-#Codigo para simpson 3/8
+#Codigo para simpson 3/8 (checar)
 def simpsonoct(limab,limar,n): 
     if n%3!=0:
         exit()
