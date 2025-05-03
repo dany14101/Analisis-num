@@ -157,14 +157,16 @@ def funcion(x):
     return float (x**2)
 
 #Codigo para simpson 1/3
-def trap(limab,limar,n): 
+def simpsontercio(limab,limar,n): 
+    if n % 2 != 0:
+        exit()
     h=(limar-limab)/n
+    sumaimpar=sumapar=0
     suma=funcion(limab)+funcion(limar)
     for i in range(1,n):
-        if i%2==0:
-         xi=limab+i*h
-         sumapar+=2*funcion(xi)    
-     for i in range(1,n):
         xi=limab+i*h
-        sumapar+=2*funcion(xi)    
-    return float((h/2)*suma)
+        if i%2==0:
+         sumapar+=2*funcion(xi)    
+        if i%2!=0:
+         sumaimpar+=4*funcion(xi)    
+    return float((h/3)*(suma+sumapar+sumaimpar)
