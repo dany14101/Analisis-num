@@ -182,6 +182,8 @@ def simpsonoct(limab,limar,n):
         xi=limab+i*h
         if i%3==0:
             suma3+=2*funcion(xi)
-        else:
-            suma1+=3*funcion(xi)
+        elif i%3==1:
+            suma1+=3*funcion(xi)   
+        elif i%3==2:
+            suma2+=3*funcion(xi)   
     return float((3*h/8)*(suma+suma1+suma2))
