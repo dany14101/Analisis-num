@@ -187,3 +187,60 @@ def simpsonoct(limab,limar,n):
         elif i%3==2:
             suma2+=3*funcion(xi)   
     return float((3*h/8)*(suma+suma1+suma2))
+
+#Codigo runge kutta 4 orden 
+def rungekutta4(f,x0,y0,h,n):
+    x=x0
+    y=y0
+    res=[(x,y)]
+
+    for _ in range(n):
+        k1=f(x, y)
+        k2=f(x+h/2,y+h*k1/2)
+        k3=f(x+h/2,y+h*k2/2)
+        k4=f(x+h,y+h*k3)
+        y+=(h/6)*(k1+2*k2+2*k3+k4)
+        x+=h
+        res.append((x,y))
+
+    return (res)
+#Codigo runge kutta 2 orden 
+def rungekutta2(f,x0,y0,h,n):
+    x=x0
+    y=y0
+    res=[(x,y)]
+
+    for _ in range(n):
+        k1=f(x,y)
+        k2=f(x+h,y+h*k1)
+        y+=(h/2)*(k1+k2)
+        x+=h
+        res.append((x,y))
+
+    return res
+
+#Metodo de euler
+def euler(f,x0,y0,h,n):
+    x=x0
+    y=y0
+    res=[(x, y)]
+
+    for _ in range(n):
+        y+=h * f(x,y)
+        x+=h
+        res.append((x,y))
+
+    return res
+
+#Metodo de taylor orden 2
+def taylor2(f,df,x0,y0,h,n):
+    x=x0
+    y=y0
+    res=[(x,y)]
+
+    for _ in range(n):
+        y+=h*f(x,y) + (h**2/2) * df(x,y)
+        x+=h
+        res.append((x,y))
+
+    return res
