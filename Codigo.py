@@ -244,3 +244,62 @@ def taylor2(f,df,x0,y0,h,n):
         res.append((x,y))
 
     return res
+
+#derivacion a derecha
+def derderech(x0,h):
+  p=np.poly1d([4,5,1])
+  v1=p(x0)
+  v2=p(x0+h)
+  return(float((v2-v1)/h))
+
+  
+#derivacion a izquierda
+def derizq(x0,h):
+  p=np.poly1d([4,5,1])
+  v1=p(x0)
+  v2=p(x0-h)
+  return(float((v1-v2)/h))
+
+#derivacion a centro
+def dercentro(x0,h):
+  p=np.poly1d([4,5,1])
+  v1=p(x0-h)
+  v2=p(x0+h)
+  return(float((v2-v1)/2*h))
+
+#spline cubico natural
+def spline_cubico_natural(x,y,x_eval):
+    n=len(x)-1
+    h=np.diff(x)
+    alpha=np.zeros(n-1)
+    for i in range(1,n):
+        alpha[i-1]=(3/h[i])*(y[i+1]-y[i])-(3/h[i-1])*(y[i]-y[i-1])
+# resolver la parte diagonal
+    l=np.ones(n+1)
+    m=np.zeros(n)
+    z=np.zeros(n+1)
+    for i in range(1,n):
+        l[i]=2*(x[i+1]-x[i-1])-h[i-1]*m[i-1]
+        m[i]=h[i]/l[i]
+        z[i]=(alpha[i-1]-h[i-1]*z[i-1])/l[i]
+    M=np.zeros(n+1)
+    for j in range(n-1,0,-1):
+        M[j]=z[j] m[j]*M[j+1]
+# resolver lcoeficientes
+    a=y[:-1]
+    b=np.zeros(n)
+    c=M[:-1]/2
+    d=np.zeros(n)
+    for i in range(n):
+        b[i]=(y[i+1]-y[i])/h[i]-(h[i]/3)*(2*M[i]+M[i+1])
+        d[i]=(M[i+1]-M[i])/(3*h[i])
+
+# Evaluar el spline
+    y=np.zeros_like(x_eval)
+    for j, xv in enumerate(x_eval):
+        i=np.searchsorted(x,xv)-1
+        if i==n:
+            i=n-1
+        dx=xv -x[i]
+        y[j]=a[i]+b[i]*dx+c[i]*dx**2 +d[i]*dx**3
+    return y
